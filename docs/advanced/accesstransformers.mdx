@@ -13,7 +13,7 @@ Adding an Access Transformer to your mod project is as simple as adding a single
 
 <Tabs defaultValue="latest">
 <TabItem value="latest" label="Latest">
-Access Transformers need to be declared in both `build.gradle` and `mods.toml`:
+Access Transformers need to be declared in both `build.gradle` and `neoforge.mods.toml`:
 
 ```groovy
 // In build.gradle:
@@ -26,7 +26,7 @@ minecraft {
 ```
 
 ```toml
-# In mods.toml:
+# In neoforge.mods.toml:
 [[accessTransformers]]
 file="META-INF/accesstransformer.cfg"
 ```
@@ -46,7 +46,7 @@ minecraft {
 ```
 
 ```toml
-# In mods.toml
+# In neoforge.mods.toml
 [[accessTransformers]]
 file="accesstransformer_main.cfg"
 

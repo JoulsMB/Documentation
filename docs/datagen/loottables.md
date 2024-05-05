@@ -34,7 +34,7 @@ public class ExampleSubProvider implements LootTableSubProvider {
 
   // The method used to generate the loot tables
   @Override
-  public void generate(BiConsumer<ResourceLocation, LootTable.Builder> writer) {
+  public void generate(HolderLookup.Provider pRegistries, BiConsumer<ResourceKey<LootTable>, LootTable.Builder> pGenerator) {
     // Generate loot tables here by calling writer#accept
   }
 }

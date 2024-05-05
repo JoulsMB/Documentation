@@ -4,7 +4,7 @@ Advancement Generation
 [Advancements] can be generated for a mod by constructing a new `AdvancementProvider` and providing `AdvancementSubProvider`s. Advancements can either be created and supplied manually or, for convenience, created using `Advancement$Builder`. The provider must be [added][datagen] to the `DataGenerator`.
 
 :::note
-Forge provides an extension for the `AdvancementProvider` called `ForgeAdvancementProvider` which integrates better for generating advancements. So, this documentation will use `ForgeAdvancementProvider` along with the sub provider interface `ForgeAdvancementProvider$AdvancementGenerator`.
+Forge provides an extension for the `AdvancementProvider` called `NeoForgeAdvancementProvider` which integrates better for generating advancements. So, this documentation will use `NeoForgeAdvancementProvider` along with the sub provider interface `NeoForgeAdvancementProvider$NeoForgeAdvancementGenerator`.
 :::
 
 ```java
@@ -25,16 +25,16 @@ public void gatherData(GatherDataEvent event) {
 }
 ```
 
-`ForgeAdvancementProvider$AdvancementGenerator`
+`NeoForgeAdvancementProvider$NeoForgeAdvancementGenerator`
 -----------------------------------------------
 
-A `ForgeAdvancementProvider$AdvancementGenerator` is responsible for generating advancements, containing a method which takes in a registry lookup, the writer (`Consumer<Advancement>`), and the existing file helper..
+A `NeoForgeAdvancementProvider$NeoForgeAdvancementGenerator` is responsible for generating advancements, containing a method which takes in a registry lookup, the writer (`Consumer<Advancement>`), and the existing file helper..
 
 ```java
-// In some subclass of ForgeAdvancementProvider$AdvancementGenerator or as a lambda reference
+// In some subclass of NeoForgeAdvancementProvider$NeoForgeAdvancementGenerator or as a lambda reference
 
 @Override
-public void generate(HolderLookup.Provider registries, Consumer<Advancement> writer, ExistingFileHelper existingFileHelper) {
+public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver, ExistingFileHelper existingFileHelper) {
   // Build advancements here
 }
 ```

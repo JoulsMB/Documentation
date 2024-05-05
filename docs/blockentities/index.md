@@ -21,7 +21,7 @@ A `BlockEntityType` can be [registered][registration] like any other registry ob
 
 ```java
 // For some DeferredRegister<BlockEntityType<?>> REGISTER
-public static final RegistryObject<BlockEntityType<MyBE>> MY_BE = REGISTER.register("mybe", () -> BlockEntityType.Builder.of(MyBE::new, validBlocks).build(null));
+public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MyBE>> MY_BE = REGISTER.register("mybe", () -> BlockEntityType.Builder.of(MyBE::new, validBlocks).build(null));
 
 // In MyBE, a BlockEntity subclass
 public MyBE(BlockPos pos, BlockState state) {
@@ -86,7 +86,7 @@ For this you need to override
 ```java
 BlockEntity#getUpdateTag()
 
-IForgeBlockEntity#handleUpdateTag(CompoundTag tag)
+IBlockEntityExtension#handleUpdateTag(CompoundTag tag)
 ```
 Again, this is pretty simple, the first method collects the data that should be sent to the client,
 while the second one processes that data. If your `BlockEntity` doesn't contain much data, you might be able to use the methods out of the [Storing Data within your `BlockEntity`][storing-data] section.
@@ -132,8 +132,7 @@ For `oldState` and `newState`, you can pass the current `BlockState` at that pos
 
 This way of synchronizing is probably the most complicated but is usually the most optimized,
 as you can make sure that only the data you need to be synchronized is actually synchronized.
-You should first check out the [`Networking`][networking] section and especially [`SimpleImpl`][simple_impl] before attempting this.
-Once you've created your custom network message, you can send it to all users that have the `BlockEntity` loaded with `SimpleChannel#send(PacketDistributor$PacketTarget, MSG)`.
+You should first check out the [`Networking`][networking] section before attempting this.
 
 :::caution
 It is important that you do safety checks, the `BlockEntity` might already be destroyed/replaced when the message arrives at the player! You should also check if the chunk is loaded (`Level#hasChunkAt(BlockPos)`).
@@ -143,4 +142,3 @@ It is important that you do safety checks, the `BlockEntity` might already be de
 [storing-data]: #storing-data-within-your-blockentity
 [menu]: ../gui/menus.md
 [networking]: ../networking/index.md
-[simple_impl]: ../networking/simpleimpl.md
